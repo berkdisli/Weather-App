@@ -6,26 +6,44 @@ const Forecast = () => {
     let [city, setCity] = useState('');
     let [unit, setUnit] = useState('metric');
     let [responseObj, setResponseObj] = useState({});
+    let [error, setError] = useState(false);
+    let [loading, setLoading] = useState(false);
 
     const uriEncodedCity = encodeURIComponent(city);
 
     function getForecast(e) {
         e.preventDefault();
 
+        if (city.length === 0) {
+            return setError(true)
+        }
+
+        setError(false);
+        setResponseObj({});
+        setLoading(true);
+
         const options = {
             method: 'GET',
             headers: {
                 'X-RapidAPI-Host': 'community-open-weather-map.p.rapidapi.com',
-                'X-RapidAPI-Key': 'f64860b1eamshb8bc6b75db45977p1fb324jsn07d032ea121c'
+                'X-RapidAPI-Key': process.env.REACT_APP_API_KEY
             }
         };
 
         fetch(`https://community-open-weather-map.p.rapidapi.com/weather?units=${unit}&q=${uriEncodedCity}`, options)
             .then(response => response.json())
             .then(response => {
-                setResponseObj(response)
+                if (response.cod !== 200) {
+                    throw new Error()
+                }
+                setResponseObj(response);
+                setLoading(false);
             })
-            .catch(err => console.error(err));
+            .catch(err => {
+                setError(true);
+                setLoading(false);
+                console.log(err.message);
+            })
     }
 
     return (
@@ -34,7 +52,7 @@ const Forecast = () => {
             <form onSubmit={getForecast}>
                 <input
                     type="text"
-                    placeholder="Enter City"
+                    placeholder="Enter a city"
                     maxLength="50"
                     className={classes.textInput}
                     value={city}
@@ -66,6 +84,8 @@ const Forecast = () => {
             </form>
             <Conditions
                 responseObj={responseObj}
+                error={error}
+                loading={loading}
             />
         </div>
     )
