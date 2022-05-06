@@ -20,10 +20,10 @@ On demand, data from the Open Weather Map API (https://rapidapi.com/community/ap
 
 ## Technologies
 
-*HTML
-*CSS
-*JavaScript
-*React
+* HTML
+* CSS
+* JavaScript
+* React
 
 ## Deployment
 
