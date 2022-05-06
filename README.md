@@ -29,7 +29,9 @@ On demand, data from the Open Weather Map API (https://rapidapi.com/community/ap
 
 To deploy the app to Github Pages:
 
-npm run deploy:gh-pages
+`npm run deploy:gh-pages`
 
 ## Hosted On
+
+https://berkdisli.github.io/Weather-App/
 
