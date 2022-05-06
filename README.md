@@ -35,3 +35,7 @@ To deploy the app to Github Pages:
 
 https://berkdisli.github.io/Weather-App/
 
+## Screenshots
+![WEATHER-APP screenshot1](/assets/weather1.png "Start-Screen") ![WEATHER-APP screenshot2](/assets/weather2.png "City") ![WEATHER-APP screenshot3](/assets/weather3.png "Valid-City-Error")
+
+
